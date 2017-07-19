@@ -100,7 +100,7 @@ describe User, " when authenticating" do
     @full_user.name = "Sensible User"
     @full_user.password = "foolishpassword"
     @full_user.email = "sensible@localhost"
-    @full_user.save
+    @full_user.save!
   end
 
   it "should create a hashed password when the password is set" do

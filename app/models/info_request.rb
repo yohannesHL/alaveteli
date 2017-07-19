@@ -1337,7 +1337,7 @@ class InfoRequest < ActiveRecord::Base
                                :model => self.class.base_class.to_s,
                                :model_id => id)
       end
-      req.save
+      req.save!
     end
   end
 
@@ -1362,7 +1362,7 @@ class InfoRequest < ActiveRecord::Base
      end
      body.without_revision do
        body.no_xapian_reindex = true
-       body.save(validate: false)
+       body.save!(validate: false)
      end
      PublicBody.set_callback(:save, :after, :purge_in_cache)
   end

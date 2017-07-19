@@ -380,7 +380,7 @@ describe IncomingMessage, "when the prominence is changed" do
                                                   :info_request => request,
                                                   :incoming_message => im)
     im.prominence = 'hidden'
-    im.save
+    im.save!
     expect(request.last_public_response_at).to be_nil
   end
 
@@ -393,7 +393,7 @@ describe IncomingMessage, "when the prominence is changed" do
                                                   :info_request => request,
                                                   :incoming_message => im)
     im.prominence = 'normal'
-    im.save
+    im.save!
     expect(request.last_public_response_at).to be_within(1.second).
       of(response_event.created_at)
   end

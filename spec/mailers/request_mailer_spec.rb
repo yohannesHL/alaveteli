@@ -499,7 +499,7 @@ describe RequestMailer do
 
     before do
       info_request.described_state = 'error_message'
-      info_request.save
+      info_request.save!
     end
 
     it 'body should contain the full admin URL' do

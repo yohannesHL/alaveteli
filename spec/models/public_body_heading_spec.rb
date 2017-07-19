@@ -61,7 +61,7 @@ describe PublicBodyHeading do
       heading.translations_attributes = { :es => { :locale => 'es',
                                                    :name => 'El Heading' } }
 
-      heading.save
+      heading.save!
       expect(PublicBodyHeading.find(heading.id).translations.size).to eq(2)
     end
 
@@ -83,7 +83,7 @@ describe PublicBodyHeading do
         heading = FactoryGirl.create(:public_body_heading)
         heading.translations_attributes = { :es => { :locale => 'es',
                                                      :name => 'El Heading' } }
-        heading.save
+        heading.save!
         heading.reload
         expect(heading.name(:es)).to eq('El Heading')
       end
@@ -92,12 +92,12 @@ describe PublicBodyHeading do
         heading = FactoryGirl.create(:public_body_heading)
         heading.translations_attributes = { 'es' => { :locale => 'es',
                                                       :name => 'Name' } }
-        heading.save
+        heading.save!
 
         heading.translations_attributes = { 'es' => { :id => heading.translation_for(:es).id,
                                                       :locale => 'es',
                                                       :name => 'Renamed' } }
-        heading.save
+        heading.save!
         expect(heading.name(:es)).to eq('Renamed')
       end
 

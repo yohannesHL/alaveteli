@@ -42,7 +42,7 @@ describe AdminPublicBodyController do
     it "shows a public body in another locale" do
       I18n.with_locale('es') do
         public_body.name = 'El Public Body'
-        public_body.save
+        public_body.save!
       end
       get :show, { :id => public_body.id, :locale => "es" },
                  { :user_id => admin_user.id }

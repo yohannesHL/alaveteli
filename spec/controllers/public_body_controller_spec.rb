@@ -123,7 +123,7 @@ describe PublicBodyController, "when listing bodies" do
         result.request_email = "#{locale}@example.org"
         result.last_edit_editor = 'test'
         result.last_edit_comment = ''
-        result.save
+        result.save!
       end
     end
     result

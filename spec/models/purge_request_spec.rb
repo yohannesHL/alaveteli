@@ -25,7 +25,7 @@ describe PurgeRequest, "purging things" do
     req = PurgeRequest.new(:url => "/begone_from_here",
                            :model => "don't care",
                            :model_id => "don't care")
-    req.save
+    req.save!
     expect(PurgeRequest.all.count).to eq(1)
     PurgeRequest.purge_all
     expect(PurgeRequest.all.count).to eq(0)
@@ -38,7 +38,7 @@ describe PurgeRequest, "purging things" do
     req = PurgeRequest.new(:url => "/begone_from_here",
                            :model => "don't care",
                            :model_id => "don't care")
-    req.save
+    req.save!
     expect(PurgeRequest.all.count).to eq(1)
     PurgeRequest.purge_all
     expect(PurgeRequest.all.count).to eq(0)

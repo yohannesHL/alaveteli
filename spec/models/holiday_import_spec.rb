@@ -164,7 +164,7 @@ describe HolidayImport do
       holiday_import = HolidayImport.new
       holiday_import.holidays = [ holiday ]
       expect(holiday).to receive(:save)
-      holiday_import.save
+      holiday_import.save!
     end
 
   end

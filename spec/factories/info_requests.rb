@@ -43,7 +43,7 @@ FactoryGirl.define do
       initial_request = create(:initial_request, :info_request => info_request,
                                                  :created_at => info_request.created_at)
       initial_request.last_sent_at = info_request.created_at
-      initial_request.save
+      initial_request.save!
     end
 
     factory :info_request_with_incoming do

@@ -222,7 +222,7 @@ describe InfoRequestBatch do
 
       it "fills out the salutation in the body with the public body name" do
         info_request_batch.body = "Dear [Authority name],\n\nSome request"
-        info_request_batch.save
+        info_request_batch.save!
         expected_body = info_request_batch.body.gsub(
           "[Authority name]",
           info_request_batch.public_bodies.first.name)
@@ -257,7 +257,7 @@ describe InfoRequestBatch do
 
       it "fills out the salutation in the body with the public body name" do
         info_request_batch.body = "Dear [Authority name],\n\nSome request"
-        info_request_batch.save
+        info_request_batch.save!
         expected_body = info_request_batch.body.gsub(
           "[Authority name]",
           info_request_batch.public_bodies.first.name)

@@ -27,7 +27,7 @@ class AlaveteliPro::InfoRequestBatchesController < AlaveteliPro::BaseController
     @draft_info_request_batch = load_draft
     load_data_from_draft(@draft_info_request_batch)
     if all_models_valid?
-      @info_request_batch.save
+      @info_request_batch.save!
       @draft_info_request_batch.destroy
       redirect_to show_alaveteli_pro_batch_request_path(id: @info_request_batch.id)
     else

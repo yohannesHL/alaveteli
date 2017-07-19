@@ -59,7 +59,7 @@ describe PublicBody do
 
     it 'update with translated name' do
       body = FactoryGirl.create(:public_body)
-      I18n.with_locale(:es) { body.name = 'hola' ; body.save }
+      I18n.with_locale(:es) { body.name = 'hola' ; body.save! }
       body.reload
 
       expect(body.update_attributes('name' => nil)).to eq(false)
@@ -89,7 +89,7 @@ describe PublicBody do
 
     it 'blank string update with translated name' do
       body = FactoryGirl.create(:public_body)
-      I18n.with_locale(:es) { body.name = 'hola' ; body.save }
+      I18n.with_locale(:es) { body.name = 'hola' ; body.save! }
       body.reload
 
       expect(body.update_attributes('name' => '')).to eq(false)
@@ -204,7 +204,7 @@ describe PublicBody do
 
     it 'ignores manually set attributes' do
       subject = FactoryGirl.build(:public_body, :version => 21)
-      subject.save
+      subject.save!
       expect(subject.version).to eq(1)
     end
 
@@ -332,7 +332,7 @@ describe PublicBody do
 
     it 'gets set on save' do
       subject = FactoryGirl.build(:public_body)
-      subject.save
+      subject.save!
       expect(subject.api_key).not_to be_blank
     end
 
@@ -467,7 +467,7 @@ describe PublicBody do
         body = FactoryGirl.create(:public_body)
         body.translations_attributes = { :es => { :locale => 'es',
                                                   :name => 'El Body' } }
-        body.save
+        body.save!
         body.reload
         expect(body.name(:es)).to eq('El Body')
       end
@@ -476,12 +476,12 @@ describe PublicBody do
         body = FactoryGirl.create(:public_body)
         body.translations_attributes = { 'es' => { :locale => 'es',
                                                    :name => 'El Body' } }
-        body.save
+        body.save!
 
         body.translations_attributes = { 'es' => { :id => body.translation_for(:es).id,
                                                    :locale => 'es',
                                                    :name => 'Renamed' } }
-        body.save
+        body.save!
         expect(body.name(:es)).to eq('Renamed')
       end
 
@@ -1842,7 +1842,7 @@ describe PublicBody::Version do
 
         it 'returns an empty list' do
           public_body.last_edit_comment = 'Just tinkering'
-          public_body.save
+          public_body.save!
           current = public_body.versions.latest
           expect(current.compare(current.previous)).to eq([])
         end
@@ -1854,7 +1854,7 @@ describe PublicBody::Version do
         it 'returns a list of changes as hashes with keys :name, :from and
            :to' do
           public_body.request_email = 'new@example.com'
-          public_body.save
+          public_body.save!
           current = public_body.versions.latest
           expected = { :name => "Request email",
                        :from => "request@example.com",
@@ -1882,7 +1882,7 @@ describe PublicBody::Version do
 
         it 'returns an empty list' do
           public_body.last_edit_comment = 'Just tinkering'
-          public_body.save
+          public_body.save!
           current = public_body.versions.latest
           expect { |b| current.compare(current.previous, &b) }.
             not_to yield_control
@@ -1895,7 +1895,7 @@ describe PublicBody::Version do
         it 'returns a list of changes as hashes with keys :name, :from and
            :to' do
           public_body.request_email = 'new@example.com'
-          public_body.save
+          public_body.save!
           current = public_body.versions.latest
           expected = { :name => "Request email",
                        :from => "request@example.com",

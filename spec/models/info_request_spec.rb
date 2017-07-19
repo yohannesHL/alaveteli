@@ -284,7 +284,7 @@ describe InfoRequest do
       info_request = FactoryGirl.create(:info_request,
                                         :awaiting_description => false)
       info_request.described_state = "user_withdrawn"
-      info_request.save
+      info_request.save!
       email, raw_email = email_and_raw_email
       info_request.receive(email, raw_email)
       expect(info_request.awaiting_description).to be false
@@ -1907,7 +1907,7 @@ describe InfoRequest do
                                                 :info_request => request,
                                                 :created_at => recent_date)
         request.awaiting_description = true
-        request.save
+        request.save!
         request
       end
 
@@ -1921,7 +1921,7 @@ describe InfoRequest do
                                                 :info_request => request,
                                                 :created_at => old_date)
         request.awaiting_description = true
-        request.save
+        request.save!
         request
       end
 
@@ -1949,7 +1949,7 @@ describe InfoRequest do
                                                 :info_request => request,
                                                 :created_at => old_date)
         request.awaiting_description = true
-        request.save
+        request.save!
         request
       end
 
@@ -1964,7 +1964,7 @@ describe InfoRequest do
                                                 :info_request => request,
                                                 :created_at => old_date)
         request.awaiting_description = true
-        request.save
+        request.save!
         request
       end
 
