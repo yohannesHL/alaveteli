@@ -245,7 +245,7 @@ class MailServerLog < ActiveRecord::Base
               squish unless Rails.env.test?
 
       set_delivery_status
-      save
+      save!
       DeliveryStatusSerializer.load(read_attribute(:delivery_status))
     end
   end

@@ -62,7 +62,7 @@ module AlaveteliPro
       self.extension = extension
       self.publish_at += duration_as_duration(extension.extension_duration)
       self.expiring_notification_at = calculate_expiring_notification_at
-      save
+      save!
     end
 
     def calculate_expiring_notification_at

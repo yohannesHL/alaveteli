@@ -529,7 +529,7 @@ class User < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       profile_photo.destroy unless profile_photo.nil?
       self.profile_photo = new_profile_photo
-      save
+      save!
     end
   end
 
@@ -567,7 +567,7 @@ class User < ActiveRecord::Base
 
   def confirm(save_record = false)
     self.email_confirmed = true
-    save if save_record
+    save! if save_record
   end
 
   def confirm!

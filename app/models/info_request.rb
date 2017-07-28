@@ -350,7 +350,7 @@ class InfoRequest < ActiveRecord::Base
     else
       self.last_public_response_at = nil
     end
-    save
+    save!
   end
 
   # Remove spaces from ends (for when used in emails etc.)
