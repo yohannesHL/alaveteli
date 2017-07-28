@@ -157,7 +157,7 @@ describe HolidayImport do
 
   end
 
-  describe 'when saving' do
+  describe '#save' do
 
     it 'saves all holidays' do
       holiday = Holiday.new
@@ -165,6 +165,18 @@ describe HolidayImport do
       holiday_import.holidays = [ holiday ]
       expect(holiday).to receive(:save)
       holiday_import.save
+    end
+
+  end
+
+  describe '#save!' do
+
+    it 'saves all holidays' do
+      holiday = Holiday.new
+      holiday_import = HolidayImport.new
+      holiday_import.holidays = [ holiday ]
+      expect(holiday).to receive(:save!)
+      holiday_import.save!
     end
 
   end
