@@ -134,7 +134,8 @@ class PublicBody < ActiveRecord::Base
   # Cannot be grouped at top as it depends on the `translates` macro
   class Translation
     include PublicBodyDerivedFields
-    strip_attributes :allow_empty => true
+    strip_attributes :allow_empty => false, :except => [:request_email]
+    strip_attributes :allow_empty => true, :only => [:request_email]
   end
 
   self.non_versioned_columns << 'created_at' << 'updated_at' << 'first_letter' << 'api_key'
