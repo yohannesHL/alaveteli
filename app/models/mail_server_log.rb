@@ -271,12 +271,21 @@ class MailServerLog < ApplicationRecord
   end
 
   def force_delivery_status(new_status)
-    # write the value without checking the old (invalid) value, avoiding
-    # the unintended ArgumentError caused by reading the old value
-    write_attribute_without_type_cast(:delivery_status, new_status)
-    # record the new value in `changes` so that save will have something
-    # to do as write_attribute_without_type_cast just updates the value
-    delivery_status_will_change!
+    if rails_upgrade?
+      # write the value without checking the old (invalid) value, avoiding
+      # the unintended ArgumentError caused by reading the old value
+      write_attribute_without_type_cast(:delivery_status, new_status)
+      # record the new value in `changes` so that save will have something
+      # to do as write_attribute_without_type_cast just updates the value
+      delivery_status_will_change!
+    else
+      # write the value without checking the old (invalid) value, avoiding
+      # the unintended ArgumentError caused by reading the old value
+      raw_write_attribute(:delivery_status, new_status)
+      # record the new value in `changes` so that save will have something
+      # to do as raw_write_attribute just updates the value
+      delivery_status_will_change!
+    end
   end
 
   def calculate_delivery_status
