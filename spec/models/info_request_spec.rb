@@ -3478,7 +3478,7 @@ describe InfoRequest do
        DESC
       EOF
       expect(apply_filters(:latest_status => 'all')).
-        to eq(InfoRequest.all.order(order_sql))
+        to eq(InfoRequest.all.order(Arel.sql(order_sql)))
 
       conditions = <<-EOF.strip_heredoc
       id in (
