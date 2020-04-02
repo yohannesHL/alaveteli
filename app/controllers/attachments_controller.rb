@@ -4,6 +4,7 @@
 class AttachmentsController < ApplicationController
   include FragmentCachable
   include InfoRequestHelper
+  include PublicTokenable
 
   before_action :find_info_request, :find_incoming_message, :find_attachment
   around_action :cache_attachments
@@ -26,6 +27,7 @@ class AttachmentsController < ApplicationController
         try(:html_safe)
     end
 
+    headers['X-Robots-Tag'] = 'noindex' if public_token
     render body: body, content_type: content_type
   end
 
@@ -52,13 +54,18 @@ class AttachmentsController < ApplicationController
 
     html = @incoming_message.apply_masks(html, response.content_type)
 
+    headers['X-Robots-Tag'] = 'noindex' if public_token
     render html: html.html_safe
   end
 
   private
 
   def find_info_request
-    @info_request = InfoRequest.find(params[:id])
+    if public_token
+      @info_request = InfoRequest.find_by!(public_token: public_token)
+    else
+      @info_request = InfoRequest.find(params[:id])
+    end
   end
 
   def find_incoming_message
