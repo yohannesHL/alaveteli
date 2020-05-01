@@ -53,4 +53,8 @@ class Project < ApplicationRecord
   def member?(user)
     members.include?(user)
   end
+
+  def contributor?(user)
+    contributors.include?(user)
+  end
 end
