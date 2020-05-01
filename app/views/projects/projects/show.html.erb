@@ -19,3 +19,10 @@
     <% end %>
   </div>
 </aside>
+
+<% if can? :remove_contributor, current_user %>
+  <%= link_to _('Leave project'),
+        project_contributor_path(@project, current_user),
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %>
+<% end %>
